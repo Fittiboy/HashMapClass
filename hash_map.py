@@ -23,7 +23,6 @@ class HashMap:
 				return None
 			index = (index + jump**2) % self.array_size
 			jump += 1
-			print(checked_indices)
 		return index
 
 	def assign(self, key, value):
