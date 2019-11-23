@@ -1,5 +1,3 @@
-from datetime import datetime as t
-
 class HashMap:
 	def __init__(self, array_size):
 		self.array_size = array_size

@@ -1,3 +1,4 @@
+from datetime import datetime as t
 from hash_map import *
 
 def test_speed(length):
