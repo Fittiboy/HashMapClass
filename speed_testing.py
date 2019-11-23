@@ -28,7 +28,7 @@ def test_speed(length):
 	hm_string = f"{hm_time.seconds}.{hm_time.microseconds}s"
 	dict_string = f"{dict_time.seconds}.{dict_time.microseconds}s"
 	print(f"Creation and lookup of {length} key-value pairs took {hm_string}",
-		f"for the hash table and {dict_string} for the dictionary.")
+		f"for the hash map and {dict_string} for the dictionary.")
 
 for i in range(3):
 	test_speed(10 * 10 ** i)
