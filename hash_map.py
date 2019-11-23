@@ -1,3 +1,5 @@
+from datetime import datetime as t
+
 class HashMap:
 	def __init__(self, array_size):
 		self.array_size = array_size
@@ -9,20 +11,12 @@ class HashMap:
 
 	def get_index(self, key):
 		index = self.hash(key)
-		jump = 1
-		start_index = 1
-		checked_indices = [index]
+		checked_indices = []
 		while self.array[index][0] and self.array[index][0] != key:
-			if index not in checked_indices:
-				checked_indices.append(index)
-			else:
-				index = start_index % self.array_size
-				jump = 1
-				start_index += 1
+			checked_indices.append(index)
 			if len(checked_indices) == self.array_size:
 				return None
-			index = (index + jump**2) % self.array_size
-			jump += 1
+			index = (index + 1) % self.array_size
 		return index
 
 	def assign(self, key, value):
@@ -40,9 +34,35 @@ class HashMap:
 		else:
 			print("There is no value stored for that key.")
 
-hash_map = HashMap(20)
 
-for i in range(20):
-	hash_map.assign(str(i), i)
+def test_speed(length):
+	s = t.now()
+	hash_map = HashMap(length)
 
-print(hash_map.array)
+	for i in range(length):
+		hash_map.assign(str(i), i)
+
+	for i in range(length):
+		hash_map.retrieve(str(i))
+
+	e = t.now()
+	hm_time = e - s
+
+	s = t.now()
+	dictionary = {}
+	for i in range(length):
+		dictionary[str(i)] = 1
+
+	for i in range(length):
+		dictionary[str(i)]
+
+	e = t.now()
+	dict_time = e - s
+
+	hm_string = f"{hm_time.seconds}.{hm_time.microseconds}s"
+	dict_string = f"{dict_time.seconds}.{dict_time.microseconds}s"
+	print(f"Creation and lookup of {length} key-value pairs took {hm_string}",
+		f"for the hash table and {dict_string} for the dictionary.")
+
+for i in range(3):
+	test_speed(10 * 10 ** i)
